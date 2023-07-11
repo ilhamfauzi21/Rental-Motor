@@ -46,6 +46,12 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Form Pelanggan.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Form Pelanggan.Designer.cs">
+      <DependentUpon>Form Pelanggan.cs</DependentUpon>
+    </Compile>
     <Compile Include="Form Utama.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -66,6 +72,9 @@
     </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <EmbeddedResource Include="Form Pelanggan.resx">
+      <DependentUpon>Form Pelanggan.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Form Utama.resx">
       <DependentUpon>Form Utama.cs</DependentUpon>
     </EmbeddedResource>
