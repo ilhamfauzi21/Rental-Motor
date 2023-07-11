@@ -46,6 +46,12 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Form Motor.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Form Motor.Designer.cs">
+      <DependentUpon>Form Motor.cs</DependentUpon>
+    </Compile>
     <Compile Include="Form Pelanggan.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -64,6 +70,12 @@
     <Compile Include="Form1.Designer.cs">
       <DependentUpon>Form1.cs</DependentUpon>
     </Compile>
+    <Compile Include="Jaminan.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Jaminan.Designer.cs">
+      <DependentUpon>Jaminan.cs</DependentUpon>
+    </Compile>
     <Compile Include="pelanggan.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -72,11 +84,17 @@
     </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <EmbeddedResource Include="Form Motor.resx">
+      <DependentUpon>Form Motor.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Form Pelanggan.resx">
       <DependentUpon>Form Pelanggan.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Form Utama.resx">
       <DependentUpon>Form Utama.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Jaminan.resx">
+      <DependentUpon>Jaminan.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="pelanggan.resx">
       <DependentUpon>pelanggan.cs</DependentUpon>
