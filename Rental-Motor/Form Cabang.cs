@@ -8,6 +8,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using static System.Windows.Forms.VisualStyles.VisualStyleElement;
 
 namespace Rental_Motor
 {
@@ -32,7 +33,30 @@ namespace Rental_Motor
 
         private void btnDlt_Click(object sender, EventArgs e)
         {
+            string dlt = "DELETE FROM cabang WHERE id_cabang = @id_cabang";
+            using (SqlConnection conn = new SqlConnection(stringConnection))
+            {
+                using (SqlCommand cmd = new SqlCommand(dlt, conn))
+                {
+                    cmd.Parameters.AddWithValue("id_cabang", txtCabang.Text);
+                    try
+                    {
+                        conn.Open();
+                        int rowsAffected = cmd.ExecuteNonQuery();
+                        MessageBox.Show("Data Berhasil Dihapus");
+                        DataGridView();
 
+                    }
+                    catch (SqlException ex)
+                    {
+                        MessageBox.Show("An Error Occurred: " + ex.Message + ("Error Code: " + ex.Number));
+                    }
+                    catch (Exception ex)
+                    {
+                        MessageBox.Show("An Error occurred: " + ex.Message);
+                    }
+                }
+            }
         }
 
         private void refreshform()
@@ -93,6 +117,38 @@ namespace Rental_Motor
         private void label4_Click(object sender, EventArgs e)
         {
 
+        }
+
+        private void btnUpd_Click(object sender, EventArgs e)
+        {
+            string upd = "UPDATE cabang SET id_cabang = @id_cabang, id_motor = @id_motor, id_pelanggan = @id_pelanggan where id_cabang = @id_cabang";
+
+            using (SqlConnection conn = new SqlConnection(stringConnection))
+            {
+                using (SqlCommand cmd = new SqlCommand(upd, conn))
+                {
+                    cmd.Parameters.AddWithValue("id_cabang", txtCabang.Text);
+                    cmd.Parameters.AddWithValue("id_motor", txtMotor.Text);
+                    cmd.Parameters.AddWithValue("id_pelanggan", txtpelanggan.Text);
+
+
+                    try
+                    {
+                        conn.Open();
+                        int rowsAffected = cmd.ExecuteNonQuery();
+                        MessageBox.Show("Data Berhasil di Updated");
+                        DataGridView();
+                    }
+                    catch (SqlException ex)
+                    {
+                        MessageBox.Show("An error occured: " + ex.Message + " (Error Code: " + ex.Number + ")");
+                    }
+                    catch (Exception ex)
+                    {
+                        MessageBox.Show("An error occured: " + ex.Message);
+                    }
+                }
+            }
         }
 
         private void btnBack_Click(object sender, EventArgs e)
