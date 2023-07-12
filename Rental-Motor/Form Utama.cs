@@ -16,5 +16,30 @@ namespace Rental_Motor
         {
             InitializeComponent();
         }
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+            new Form_Motor().Show();
+        }
+
+        private void button2_Click(object sender, EventArgs e)
+        {
+            new Form_Cabang().Show();
+        }
+
+        private void button3_Click(object sender, EventArgs e)
+        {
+            new Form_Pelanggan().Show();
+        }
+
+        private void button4_Click(object sender, EventArgs e)
+        {
+            new Jaminan().Show();
+        }
+
+        private void button5_Click(object sender, EventArgs e)
+        {
+            new Form_Admin().Show();
+        }
     }
 }

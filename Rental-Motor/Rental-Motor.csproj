@@ -46,6 +46,12 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Form Admin.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Form Admin.Designer.cs">
+      <DependentUpon>Form Admin.cs</DependentUpon>
+    </Compile>
     <Compile Include="Form Cabang.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -70,12 +76,6 @@
     <Compile Include="Form Utama.Designer.cs">
       <DependentUpon>Form Utama.cs</DependentUpon>
     </Compile>
-    <Compile Include="Form1.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="Form1.Designer.cs">
-      <DependentUpon>Form1.cs</DependentUpon>
-    </Compile>
     <Compile Include="Jaminan.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -90,6 +90,19 @@
     </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="rentalmotorDataSet.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>rentalmotorDataSet.xsd</DependentUpon>
+    </Compile>
+    <Compile Include="rentalmotorDataSet1.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>rentalmotorDataSet1.xsd</DependentUpon>
+    </Compile>
+    <EmbeddedResource Include="Form Admin.resx">
+      <DependentUpon>Form Admin.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Form Cabang.resx">
       <DependentUpon>Form Cabang.cs</DependentUpon>
     </EmbeddedResource>
@@ -126,6 +139,28 @@
       <DependentUpon>Settings.settings</DependentUpon>
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
     </Compile>
+    <None Include="rentalmotorDataSet.xsc">
+      <DependentUpon>rentalmotorDataSet.xsd</DependentUpon>
+    </None>
+    <None Include="rentalmotorDataSet.xsd">
+      <Generator>MSDataSetGenerator</Generator>
+      <LastGenOutput>rentalmotorDataSet.Designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="rentalmotorDataSet.xss">
+      <DependentUpon>rentalmotorDataSet.xsd</DependentUpon>
+    </None>
+    <None Include="rentalmotorDataSet1.xsc">
+      <DependentUpon>rentalmotorDataSet1.xsd</DependentUpon>
+    </None>
+    <None Include="rentalmotorDataSet1.xsd">
+      <Generator>MSDataSetGenerator</Generator>
+      <LastGenOutput>rentalmotorDataSet1.Designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="rentalmotorDataSet1.xss">
+      <DependentUpon>rentalmotorDataSet1.xsd</DependentUpon>
+    </None>
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />

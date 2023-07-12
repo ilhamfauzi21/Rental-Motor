@@ -5,33 +5,40 @@ using System.Data;
 using System.Data.SqlClient;
 using System.Drawing;
 using System.Linq;
+using System.Security.Cryptography;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using static System.Windows.Forms.VisualStyles.VisualStyleElement;
 
 namespace Rental_Motor
 {
-    public partial class Form_Pelanggan : Form
+    public partial class Form_Admin : Form
     {
         private string stringConnection = "data source =REZHAA\\REZHA;" +
            "database=rentalmotor;user ID=sa; password=123";
         private SqlConnection koneksi;
-        private string Nama, Idplgn, NoHp, Alamat;
-        public Form_Pelanggan()
+        private string admin, nama;
+
+        public Form_Admin()
         {
             InitializeComponent();
             koneksi = new SqlConnection(stringConnection);
             refreshform();
         }
-
-        private void btnBack_Click(object sender, EventArgs e)
+        private void refreshform()
         {
-            new Form_Utama().Show();
+            txtadmin.Text = "";
+            txtnama.Text = "";
+            txtadmin.Enabled = true;
+            txtnama.Enabled = true;
+            btnAdd.Enabled = true;
+            BtnDelete.Enabled = true;
         }
-        private void DataGridView()
+        private void datagridview()
         {
             koneksi.Open();
-            string str = "select * from dbo.pelanggan";
+            string str = "select id_admin, nama_admin from dbo.admin";
             SqlDataAdapter da = new SqlDataAdapter(str, koneksi);
             DataSet ds = new DataSet();
             da.Fill(ds);
@@ -39,20 +46,36 @@ namespace Rental_Motor
             koneksi.Close();
         }
 
-        private void btnDelete_Click(object sender, EventArgs e)
+        private void Form_Admin_Load(object sender, EventArgs e)
         {
-            string dlt = "DELETE FROM pelanggan WHERE id_pelanggan = @id_pelanggan";
+
+        }
+
+        private void btnBack_Click(object sender, EventArgs e)
+        {
+            new Form_Utama().Show();
+        }
+
+        private void BtnOpen_Click(object sender, EventArgs e)
+        {
+            datagridview();
+            BtnOpen.Enabled = true;
+        }
+
+        private void BtnDelete_Click(object sender, EventArgs e)
+        {
+            string dlt = "DELETE FROM admin WHERE id_admin = @id_admin";
             using (SqlConnection conn = new SqlConnection(stringConnection))
             {
                 using (SqlCommand cmd = new SqlCommand(dlt, conn))
                 {
-                    cmd.Parameters.AddWithValue("id_pelanggan", txtPlgn.Text);
+                    cmd.Parameters.AddWithValue("id_admin", txtadmin.Text);
                     try
                     {
                         conn.Open();
                         int rowsAffected = cmd.ExecuteNonQuery();
                         MessageBox.Show("Data Berhasil Dihapus");
-                        DataGridView();
+                        datagridview();
 
                     }
                     catch (SqlException ex)
@@ -67,31 +90,25 @@ namespace Rental_Motor
             }
         }
 
-        private void btnOpen_Click(object sender, EventArgs e)
-        {
-            DataGridView();
-            btnOpen.Enabled = true;
-        }
-
         private void btnUpdate_Click(object sender, EventArgs e)
         {
-            string upd = "UPDATE pelanggan SET id_pelanggan = @id_pelanggan, nama_pelanggan = @nama_pelanggan, no_telp = @no_telp, alamat = @alamat where id_pelanggan = @id_pelanggan";
+            string upd = "UPDATE admin SET id_admin = @id_admin, nama_admin = @nama_admin where id_admin = @id_admin";
 
             using (SqlConnection conn = new SqlConnection(stringConnection))
             {
                 using (SqlCommand cmd = new SqlCommand(upd, conn))
                 {
-                    cmd.Parameters.AddWithValue("id_pelanggan", txtPlgn.Text);
-                    cmd.Parameters.AddWithValue("nama_pelanggan", txtNama.Text);
-                    cmd.Parameters.AddWithValue("no_telp", txtNoHP.Text);
-                    cmd.Parameters.AddWithValue("alamat", txtAlamat.Text);
+                    cmd.Parameters.AddWithValue("id_admin", txtadmin.Text);
+                    cmd.Parameters.AddWithValue("nama_admin", txtnama.Text);
+                    
+
 
                     try
                     {
                         conn.Open();
                         int rowsAffected = cmd.ExecuteNonQuery();
                         MessageBox.Show("Data Berhasil di Updated");
-                        DataGridView();
+                        datagridview();
                     }
                     catch (SqlException ex)
                     {
@@ -105,39 +122,18 @@ namespace Rental_Motor
             }
         }
 
-        private void refreshform()
+        private void btnAdd_Click(object sender, EventArgs e)
         {
-            txtNama.Text = "";
-            txtPlgn.Text = "";
-            txtNoHP.Text = "";
-            txtAlamat.Text = "";
-            txtNama.Enabled = true;
-            txtPlgn.Enabled = true;
-            txtNoHP.Enabled = true;
-            txtAlamat.Enabled = true;
-            btnAdd.Enabled = true;
-            btnDelete.Enabled = true;
-        }
-        private void Form_Pelanggan_Load(object sender, EventArgs e)
-        {
-
-        }
-
-        private void button1_Click(object sender, EventArgs e)
-        {
-            Nama = txtNama.Text;
-            Idplgn = txtPlgn.Text;
-            NoHp = txtNoHP.Text;
-            Alamat = txtAlamat.Text;
+            
+            admin = txtadmin.Text;
+            nama = txtnama.Text;
 
             koneksi.Open();
-            string str = "insert into dbo.pelanggan (id_pelanggan, nama_pelanggan, no_telp , alamat)" + "values(@id_pelanggan, @nama_pelanggan, @no_telp , @alamat)";
+            string str = "insert into dbo.admin (id_admin, nama_admin)" + "values(@id_admin, @nama_admin)";
             SqlCommand cmd = new SqlCommand(str, koneksi);
             cmd.CommandType = CommandType.Text;
-            cmd.Parameters.Add(new SqlParameter("id_pelanggan", Idplgn));
-            cmd.Parameters.Add(new SqlParameter("nama_pelanggan", Nama));
-            cmd.Parameters.Add(new SqlParameter("no_telp", NoHp));
-            cmd.Parameters.Add(new SqlParameter("alamat", Alamat));
+            cmd.Parameters.Add(new SqlParameter("id_admin", admin));
+            cmd.Parameters.Add(new SqlParameter("nama_admin", nama));
 
             cmd.ExecuteNonQuery();
             koneksi.Close();
